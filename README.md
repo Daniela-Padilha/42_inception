@@ -30,6 +30,8 @@ Each container also includes the settings, prerequisites, dependencies, and serv
 
 One big advantage of Docker is portability, if something works on your machine, it will also work on someone else’s. This makes it very useful for developers who want to share projects or deploy applications easily.
 
+<hr>
+
 ### What is Docker Image?
 
 A Docker image is an executable file used to create and run containers. It contains everything the container needs to work properly, such as libraries, dependencies, configurations, and application files.
@@ -37,6 +39,8 @@ A Docker image is an executable file used to create and run containers. It conta
 Docker images are immutable, which means they cannot be changed once they are created. If you need to make changes, you must create a new image or add another layer on top of the existing one.
 
 Container images are built using layers. Each layer represents changes made to the file system, such as adding, removing, or modifying files. This layered structure makes images efficient and easy to update.
+
+<hr>
 
 ### What is Docker Compose?
 
@@ -46,7 +50,11 @@ You can start several containers using multiple docker run commands. But this qu
 
 Docker Compose solves this problem. It is a declarative tool that lets you define all your containers and their configurations in one single file, called a YAML file. With one command, you can start, stop, and manage all your services easily.
 
+<hr>
+
 ### Design choices
+
+<hr>
 
 ### Virtual Machines vs Docker
 
@@ -66,6 +74,9 @@ This also brings a limitation:
 
 This happens because containers depend on the host machine’s kernel.
 
+Visual Representation:
+
+```text
 
 Virtual Machine:                                   Docker:
 
@@ -75,7 +86,7 @@ VMs: W, U, C, D                                    Containers: U, C, D
 | W | | U | | C | | D |                               | U | | C | | D |
 |___| |___| |___| |___|                               |___| |___| |___|
                                                 
-  🡹     🡹    🡹     🡹                                   🡹     🡹     🡹   
+  🡹     🡹    🡹     🡹                               🡹     🡹     🡹   
  _____________________                              _____________________
 |       Virtual       |                            |       Ubuntu +      |
 |   Machine Software  |                            |    Docker Engine    |
@@ -87,18 +98,31 @@ VMs: W, U, C, D                                    Containers: U, C, D
 |       Hardware      |                            |       Hardware      |
 |_____________________|                            |_____________________|
 
+```                          
+
 Each letter represents an operating system:
+
 w - Windows
+
 U - Ubuntu
+
 C - Centos
+
 D - Debian
+
+<hr>
 
 ### Secrets vs Environment Variables
 
+<hr>
+
 ### Docker Network vs Host Network
+
+<hr>
 
 ### Docker Volumes vs Bind Mounts
 
+<hr>
 
 ## Resources
 
@@ -109,6 +133,8 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 https://docs.docker.com/get-started/get-docker/
 
 https://www.youtube.com/watch?v=eGz9DS-aIeY
+
+<hr>
 
 ### AI Usage
 
