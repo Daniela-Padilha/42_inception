@@ -32,6 +32,12 @@ One big advantage of Docker is portability, if something works on your machine, 
 
 <hr>
 
+### What is Dockerfile?
+
+A Dockerfile is a text file that contains the instructions for building a Docker image. It specifies the base image to use, the dependencies and software to install, and any other configurations or scripts that are needed to set up the environment for the application to run. Using the Dockerfile we can use the command ```docker build``` to build the docker image.
+
+<hr>
+
 ### What is Docker Image?
 
 A Docker image is an executable file used to create and run containers. It contains everything the container needs to work properly, such as libraries, dependencies, configurations, and application files.
@@ -39,6 +45,8 @@ A Docker image is an executable file used to create and run containers. It conta
 Docker images are immutable, which means they cannot be changed once they are created. If you need to make changes, you must create a new image or add another layer on top of the existing one.
 
 Container images are built using layers. Each layer represents changes made to the file system, such as adding, removing, or modifying files. This layered structure makes images efficient and easy to update.
+
+We can use the command ```docker run``` to run the image as a container.
 
 <hr>
 
@@ -52,7 +60,22 @@ Docker Compose solves this problem. It is a declarative tool that lets you defin
 
 <hr>
 
+
+### What is a Daemon?
+
+A daemon is a computer program that runs as a background process, independently of direct user interaction. It performs tasks without requiring manual input, often listening for requests or events and responding as needed.
+
+The Docker Daemon (dockerd) is the core background service running on the host operating system. It is responsible for managing all Docker operations, including creating, running, and stopping containers, handling images, managing networks, and maintaining volumes. Essentially, the Docker Daemon is the “brain” of the Docker ecosystem, coordinating all container activities.
+
+Daemons can also communicate with each other or with clients (like the Docker CLI or API) to manage Docker services across multiple hosts, enabling complex setups such as multi-container applications and orchestration.
+
+<hr>
+
 ### Design choices
+
+For this project, I chose the penultimate stable version of Debian, Bookworm. I opted for Debian over Alpine because of its stability, predictability, and extensive package repository accessible via apt. Additionally, Debian comes with many pre-installed packages, which reduces the time spent installing dependencies. My prior experience with Debian also made it a more comfortable choice.
+
+While Alpine is popular for containers due to its small image size, fast download/build times, and security features, I felt that Debian was better suited for this project, providing a more familiar and convenient development environment.
 
 <hr>
 
@@ -128,11 +151,15 @@ D - Debian
 
 References used in this project:
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+Intro to Dockers: https://www.youtube.com/watch?v=eGz9DS-aIeY
 
-https://docs.docker.com/get-started/get-docker/
+Docker Documentation: https://docs.docker.com/get-started/get-docker/
 
-https://www.youtube.com/watch?v=eGz9DS-aIeY
+
+How to install Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+
+Dockerfile Best Practices: https://docs.docker.com/build/building/best-practices/
 
 <hr>
 
