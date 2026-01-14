@@ -5,15 +5,17 @@ FROM debian:bookworm
 EXPOSE 3306
 
 # Execute this cmd on the terminal
-RUN apt update && apt install -y --no-install-recomends \
-	mariadb-server && \
+RUN apt update && \
+	apt install -y --no-install-recommends mariadb-server && \
 	rm -rf /var/lib/apt/lists/*
 
 # Copy a file to the container
-COPY conf/50-server.cnf etc/mysql/mariadb.conf.d/
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-COPY tools/setup.sh /bin/
-RUN chmod +x /bin/setup.sh
+RUN mkdir /run/mysqld
+
+COPY tools/init.sh /bin/
+RUN chmod +x /bin/init.sh
 
 # When started run this cmd
-CMD ["setup.sh", "mysql_safe"]
+CMD ["/bin/init.sh", "mysqld_safe"]
