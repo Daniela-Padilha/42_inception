@@ -6,7 +6,7 @@
 #    By: ddo-carm <ddo-carm@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/06 17:05:46 by ddo-carm          #+#    #+#              #
-#    Updated: 2026/01/16 17:41:15 by ddo-carm         ###   ########.fr        #
+#    Updated: 2026/01/16 17:46:50 by ddo-carm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,13 +94,13 @@ re: fclean all
 
 #help
 help:
-	@echo "make - start full project"
-	@echo "data - create volumes"
-	@echo "build - build containers"
-	@echo "image - list docker images"
-	@echo "stop - stop all containers"
-	@echo "ps - show running containers"
-	@echo "mariadb - open MySQL"
+	@echo $(BMAG)"make"$(RES) "	 - start full project"
+	@echo $(BMAG)"data"$(RES) " 	 - create volumes"
+	@echo $(BMAG)"build"$(RES) " 	 - build containers"
+	@echo $(BMAG)"image"$(RES) " 	 - list docker images"
+	@echo $(BMAG)"stop"$(RES) "	 - stop all containers"
+	@echo $(BMAG)"ps"$(RES) " 	 - show running containers"
+	@echo $(BMAG)"mariadb"$(RES) " - open MySQL"
 
 #Phony targets to avoid clashes
 .PHONY: all data build up image stop ps mariadb clean fclean re help
