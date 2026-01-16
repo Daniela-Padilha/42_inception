@@ -12,11 +12,15 @@ The goal is to virtualize multiple services by creating Docker images in a perso
 
 1. Install
 
-```git clone https://github.com/Daniela-Padilha/42_inception.git && cd 42_inception```
+```bash
+git clone https://github.com/Daniela-Padilha/42_inception.git && cd 42_inception
+```
 
 2. Compile and execute
 
-```make```
+```bash
+make
+```
 
 ## Project description
 

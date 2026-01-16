@@ -98,11 +98,15 @@ mariadb     Up
 
 3. Check logs for a container:
 
-```docker logs <name>```
+```bash
+docker logs <name>
+```
 
 4. Access conatiner shell:
 
-```docker exec -it <container> bash```
+```bash
+docker exec -it <container> bash
+```
 
 - Verify WordPress is reachable in the browser.
 

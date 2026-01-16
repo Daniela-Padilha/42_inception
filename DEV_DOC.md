@@ -113,11 +113,15 @@ The project stores persistent data on the host machine in the following director
 
 - WordPress files:
 
-```/home/<your_user>/data/wordpress```
+```bash
+/home/<your_user>/data/wordpress
+```
 
 - MariaDB database: 
 
-```/home/<your_user>/data/mariadb```
+```bash
+/home/<your_user>/data/mariadb
+```
 
 > Replace <your_user> with your username (run ```whoami``` in the terminal).
 
