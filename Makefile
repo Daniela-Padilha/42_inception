@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddo-carm <ddo-carm@student.42.fr>          +#+  +:+       +#+         #
+#    By: ddo-carm <ddo-carm@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/06 17:05:46 by ddo-carm          #+#    #+#              #
-#    Updated: 2026/01/06 17:05:49 by ddo-carm         ###   ########.fr        #
+#    Updated: 2026/01/16 17:41:15 by ddo-carm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,53 +19,49 @@
 # /__________)                                        (__________\ 
 
 
-NAME = PmergeMe
-SRCS_D = .
-INC_D = inc
+NAME = inception
 
-#source files
-SRC = $(SRCS_D)/main.cpp \
- 		$(SRCS_D)/PmergeMe.cpp \
+DOCKER_COMPOSE = docker compose -f srcs/docker-compose.yaml
 
-#include files
-INC = $(INC_D)/PmergeMe.hpp \
-
-#object files
-OBJ = $(SRC:.cpp=.o)
-
-#		   ________________________________________________
-#  _______|                                               |_______
-# \       |                FLAGS & COMMANDS               |      /
-#  \      |                                               |     /
-#  /      |_______________________________________________|     \ 
-# /__________)                                        (__________\ 
-
-
-COMP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-GDB = -g
-RM = rm -f
-VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
+DATA_D = $(HOME)/data
+MARIADB_D = $(DATA_D)/mariadb
+WP_D = $(DATA_D)/wordpress
 
 #          ________________________________________________
 # ________|                                               |_______
-# \       |                    LIB RULES                  |      /
+# \       |                    TARGETS                    |      /
 #  \      |                                               |     /
 #  /      |_______________________________________________|     \ 
 # /__________)                                        (__________\ 
 
-all: $(NAME) 
+all: up
 
-$(NAME): $(OBJ) $(INC)
-	$(COMP) $(CPPFLAGS) $(OBJ) -I $(INC_D) -o $(NAME)
-	@echo $(BGRN)"✨Compilation completed✨"$(RES)
+data:
+	mkdir -p $(MARIADB_D) $(WP_D)
+	@echo $(BMAG)"Volumes folders were created"$(RES)
 
-%.o: %.cpp
-	@$(COMP) $(CPPFLAGS) -I $(INC_D) -c $< -o $@
-	@echo $(BMAG)"Compiling..."$(RES)
+build: data
+	$(DOCKER_COMPOSE) build
+	@echo $(BGRN)"✅Build complete✅"$(RES)
 
-val: all
-	@$(VAL) ./$(NAME)
+up: build
+	$(DOCKER_COMPOSE) up -d
+	@echo $(BGRN)"✨Containers Running✨"$(RES)
+
+image:
+	docker image ls
+
+stop:
+	$(DOCKER_COMPOSE) down
+	@echo $(BRED)"Containers are now stopped"$(RES)
+
+ps:
+	$(DOCKER_COMPOSE) ps
+
+mariadb:
+	docker exec -it mariadb mysql -u root -p
+	@echo $(BMAG)"✨MariaDB is now running✨"$(RES)
+
 
 #          ________________________________________________
 # ________|                                               |_______
@@ -74,19 +70,20 @@ val: all
 #  /      |_______________________________________________|     \ 
 # /__________)                                        (__________\ 
 
-#remove .o
+#remove containers
 clean:
-	@$(RM) $(OBJ)
-	@echo $(BMAG)"✨Objects removed" $(BGRN)"successfully✨"$(RES)
+	$(DOCKER_COMPOSE) down --remove-orphans
+	@echo $(BMAG)"✨Containers removed" $(BGRN)"successfully✨"$(RES)
 
 #clean and remove
 fclean: clean
-	@$(RM) $(NAME)
-	@echo $(BMAG)"✨Program removed" $(BGRN)"successfully✨"$(RES)
+	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
+	rm -rf ~/data/*
+	@echo $(BMAG)"✨Images and volumes removed" $(BGRN)"successfully✨"$(RES)
 
 #remake
 re: fclean all
-	@echo $(BMAG)"✨Re-compile was" $(BGRN)"successfull✨"$(RES)
+	@echo $(BMAG)"✨Re-build was" $(BGRN)"successfull✨"$(RES)
 
 #          ________________________________________________
 # ________|                                               |_______
@@ -95,8 +92,18 @@ re: fclean all
 #  /      |_______________________________________________|     \ 
 # /__________)                                        (__________\ 
 
+#help
+help:
+	@echo "make - start full project"
+	@echo "data - create volumes"
+	@echo "build - build containers"
+	@echo "image - list docker images"
+	@echo "stop - stop all containers"
+	@echo "ps - show running containers"
+	@echo "mariadb - open MySQL"
+
 #Phony targets to avoid clashes
-.PHONY: all clean fclean re
+.PHONY: all data build up image stop ps mariadb clean fclean re help
 
 #          ________________________________________________
 # ________|                                               |_______
