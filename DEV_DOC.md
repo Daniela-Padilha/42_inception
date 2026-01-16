@@ -60,19 +60,29 @@ This project uses Docker and Docker Compose to build and run all services (WordP
 Example workflow:
 
 - Build and start the project
-```make```
+```bash
+make
+```
 
 - Stop the containers
-```make down```
+```bash
+make down
+```
 
 - Start everything again
-```make up```
+```bash
+make up
+```
 
 - Remove containers, images, and volumes
-```make fclean```
+```bash
+make fclean
+```
 
 - Rebuild the project from scratch
-```make re```
+```bash
+make re
+```
 
 ## Relevant Commands
 

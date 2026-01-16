@@ -84,9 +84,17 @@ All credentials are stored in the .env file in the ```./srcs/``` directory:
 
 1. check all running containers:
 
-- Using Makefile: ```make ps```
+- Using Makefile: 
 
-- Using Docker CLI: ```docker ps```
+```bash
+make ps
+```
+
+- Using Docker CLI: 
+
+```bash
+docker ps
+```
 
 2. Verify that the output shows something similar to:
 
@@ -102,7 +110,7 @@ mariadb     Up
 docker logs <name>
 ```
 
-4. Access conatiner shell:
+4. Access container shell:
 
 ```bash
 docker exec -it <container> bash
