@@ -4,9 +4,9 @@
 
 ## Description
 
-This project aims to broaden the knowledge of system administration by using Docker and Docker-Compose.
+This project aims to expand knowledge in system administration through the use of Docker and Docker Compose.
 
-The goal was to virtualize several Docker images, creating them in a new personal virtual machine, to deploy a small web server that use the NGINX server with a Wordpress website and a MariaDB database.
+The goal is to virtualize multiple services by creating Docker images in a personal virtual machine, and to deploy a small web server running NGINX, hosting a WordPress website connected to a MariaDB database.
 
 ## Instructions
 

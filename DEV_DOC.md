@@ -18,9 +18,95 @@ For this project you will need the following prerequisites installed:
 
 ## Configuration files & secrets
 
+This project does not use Docker Secrets, so it requires a .env file to provide necessary environment variables.
+
+Setup steps:
+
+1. Navigate to the ```./srcs/``` directory.
+
+2. Create a file named ```.env```.
+
+3. Add the following required variables to the file:
+
+
+```SQL_DATABASE       # Name of the MariaDB database```
+```SQL_USER           # MariaDB user```
+```SQL_PASSWORD       # MariaDB user password```
+```SQL_ROOT_PASSWORD  # MariaDB root password```
+
+```WP_ADMIN_USER      # WordPress admin username```
+```WP_ADMIN_PASSWORD  # WordPress admin password```
+```WP_USER            # WordPress regular user```
+```WP_PASSWORD        # WordPress regular user password```
+
+```DOMAIN_NAME        # Domain for WordPress (e.g., <your_user>.42.fr)```
+
+Make sure to replace placeholder values with your own credentials and domain name.
+
 ## Build & Launch
 
+This project uses Docker and Docker Compose to build and run all services (WordPress, MariaDB, NGINX). The provided Makefile simplifies the process.
+
+### Using the Makefile
+
+| Command       | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| `make`        | Build all Docker images and create the containers.                         |
+| `make up`     | Start the containers and network in the background.                        |
+| `make down`   | Stop the containers and remove the network.                                |
+| `make clean`  | Remove project containers, networks, and images created by Docker Compose. |
+| `make fclean` | Remove everything, including volumes and host data.                        |
+| `make re`     | Fully rebuild the project from scratch (`fclean` followed by `make`).      |
+
+Example workflow:
+
+- Build and start the project
+```make```
+
+- Stop the containers
+```make down```
+
+- Start everything again
+```make up```
+
+- Remove containers, images, and volumes
+```make fclean```
+
+- Rebuild the project from scratch
+```make re```
+
 ## Relevant Commands
+
+You can interact with and manage the Docker containers, images, networks, and volumes using both the Makefile and Docker CLI commands.
+
+### Using the Makefile
+
+| Command          | Description                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| `make ps`        | List all running containers in the project.                                |
+| `make image`     | List all Docker Images.                                                    |
+| `make clean`     | Remove project containers, networks, and images created by Docker Compose. |
+| `make fclean`    | Remove everything, including volumes and host data.                        |
+| `make re`        | Rebuild the project from scratch.                                          |
+
+### Using Docker CLI
+
+| Command                                   | Description                                  |
+| ----------------------------------------- | -------------------------------------------- |
+| `docker ps`                               | List currently running containers.           |
+| `docker ps -a`                            | List all containers, including stopped ones. |
+| `docker stop <container_name>`            | Stop a running container.                    |
+| `docker start <container_name>`           | Start a stopped container.                   |
+| `docker rm <container_name>`              | Remove a container.                          |
+| `docker images`                           | List all Docker images.                      |
+| `docker rmi <image_name>`                 | Remove a Docker image.                       |
+| `docker volume ls`                        | List all Docker volumes.                     |
+| `docker volume rm <volume_name>`          | Remove a Docker volume.                      |
+| `docker network ls`                       | List Docker networks.                        |
+| `docker network prune`                    | Remove unused networks.                      |
+| `docker compose down -v`                  | Remove all containers and volumes.           |
+| `docker exec -it <container_name> bash`   | Access container shell.                      |
+
 
 ## Project Data
 
