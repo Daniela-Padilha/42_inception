@@ -6,6 +6,7 @@ EXPOSE 3306
 
 # Execute this cmd on the terminal
 RUN apt update && \
+	apt upgrade -y && \
 	apt install -y --no-install-recommends mariadb-server && \
 	rm -rf /var/lib/apt/lists/*
 
@@ -18,4 +19,4 @@ COPY tools/init.sh /bin/
 RUN chmod +x /bin/init.sh
 
 # When started run this cmd
-CMD ["/bin/init.sh", "mysqld_safe"]
+ENTRYPOINT ["/bin/init.sh"]
