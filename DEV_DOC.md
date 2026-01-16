@@ -30,14 +30,22 @@ Setup steps:
 
 
 ```SQL_DATABASE       # Name of the MariaDB database```
+
 ```SQL_USER           # MariaDB user```
+
 ```SQL_PASSWORD       # MariaDB user password```
+
 ```SQL_ROOT_PASSWORD  # MariaDB root password```
 
+
 ```WP_ADMIN_USER      # WordPress admin username```
+
 ```WP_ADMIN_PASSWORD  # WordPress admin password```
+
 ```WP_USER            # WordPress regular user```
+
 ```WP_PASSWORD        # WordPress regular user password```
+
 
 ```DOMAIN_NAME        # Domain for WordPress (e.g., <your_user>.42.fr)```
 
