@@ -22,25 +22,35 @@ The project can be managed using the Makefile or Docker Compose commands.
 
 - Start and build the project
 
-```make```
+```bash
+make
+```
 
 - Stop containers and network
 
-```make down```
+```bash
+make down
+```
 
 - Rebuild the project from scratch
 
-```make re```
+```bash
+make re
+```
 
 ### Using Docker Compose directly:
 
 - Start
 
-```docker compose -f srcs/docker-compose.yaml up -d ```
+```bash
+docker compose -f srcs/docker-compose.yaml up -d
+```
 
 - Stop
 
-```docker compose -f srcs/docker-compose.yaml down ```
+```bash
+docker compose -f srcs/docker-compose.yaml down
+```
 
 > The Makefile is recommended for simplicity.
 
