@@ -15,8 +15,8 @@ COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 RUN mkdir /run/mysqld
 
-COPY tools/init.sh /bin/
-RUN chmod +x /bin/init.sh
+COPY tools/db-init.sh /bin/
+RUN chmod +x /bin/db-init.sh
 
 # When started run this cmd
-ENTRYPOINT ["/bin/init.sh"]
+ENTRYPOINT ["/bin/db-init.sh"]
