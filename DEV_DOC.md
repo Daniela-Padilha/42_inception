@@ -40,7 +40,7 @@ Setup steps:
 | `WP_PASSWORD`       | WordPress regular user password.                            |
 | `DOMAIN_NAME`       | Domain for WordPress (e.g., <your_user>.42.fr).             |
 
-Make sure to replace placeholder values with your own credentials and domain name.
+> Make sure to replace placeholder values with your own credentials and domain name.
 
 ## Build & Launch
 
@@ -119,7 +119,7 @@ The project stores persistent data on the host machine in the following director
 
 ```/home/<your_user>/data/mariadb```
 
-Replace <your_user> with your username (run ```whoami``` in the terminal).
+> Replace <your_user> with your username (run ```whoami``` in the terminal).
 
 ### How data persists
 
