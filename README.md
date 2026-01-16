@@ -137,13 +137,29 @@ D - Debian
 
 ### Secrets vs Environment Variables
 
+Environment Variables are key-value pairs passed to a container at runtime. They are usually used to configure the container and are easy to set up. They work well for simple, non-sensitive configuration, such as database host or port. However, they are not secure, anyone with access to the container can see them, and they may appear in logs or command history.
+
+Docker Secrets, on the other hand, provide a more secure way to store sensitive information, such as passwords or admin keys. Secrets are encrypted and only accessible to containers that are explicitly granted access. They are slightly more complex to set up but are recommended for sensitive data in production.
+
 <hr>
 
 ### Docker Network vs Host Network
 
+Docker Network (also called a bridge network) is created and used by default. Containers connected to this network get their own internal IP addresses, allowing multiple containers to communicate with each other safely. These IPs are isolated from the host network, which makes the setup more secure.
+
+Host Network means the container uses the host machine’s network directly, without IP isolation. The container shares the same IP addresses as the host. This can provide slightly better network performance, but it is less secure because the container is not isolated from the host.
+
 <hr>
 
 ### Docker Volumes vs Bind Mounts
+
+Docker provides different ways to store and persist data created or used by containers.
+
+Bind mounts have been part of Docker from the early versions. They allow you to link a file or directory from your host machine directly into a container using its absolute path. Any changes made on the host are immediately visible inside the container. Some downsides of bind mounts are: containers using bind mounts are tied to the host's directory structure, which can make them less portable, and processes in the container can modify or delete crucial host files if not restricted.
+
+Docker volumes, on the other hand, are fully managed by Docker and do not depend on the host filesystem. Volumes are still on the host machine, but Docker decides where. Data in volumes persists across container restarts, and volumes can be managed using the Docker CLI or API.
+
+Volumes are generally recommended over bind mounts because they are more portable, safer, and make it easier to share data between multiple containers. Compared to volumes, bind mounts are less isolated and less suitable for production environments.
 
 <hr>
 
@@ -155,9 +171,7 @@ Intro to Dockers: https://www.youtube.com/watch?v=eGz9DS-aIeY
 
 Docker Documentation: https://docs.docker.com/get-started/get-docker/
 
-
 How to install Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
-
 
 Dockerfile Best Practices: https://docs.docker.com/build/building/best-practices/
 
