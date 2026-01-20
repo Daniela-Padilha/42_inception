@@ -4,12 +4,11 @@ EXPOSE 9000
 
 RUN apt update && \
 	apt upgrade -y && \
-	apt install -y --no-install-recomends \
+	apt install -y \
 	php8.2-fpm \
 	php8.2-mysqli \
 	curl \
-	mariadb-client \
-	rm -rf /var/lib/apt/lists/*
+	mariadb-client
 
 #Change owner to run socket
 RUN mkdir -p /run/php && \

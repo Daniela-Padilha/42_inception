@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# put in .env at the end
-DB_NAME=db
-DB_USER=ddo-carm
-DB_PASSWORD=123
-DB_PASS_ROOT=abc
-
 cat << EOF > /etc/mysql/init.sql
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';

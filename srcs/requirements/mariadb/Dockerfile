@@ -7,7 +7,7 @@ EXPOSE 3306
 # Execute this cmd on the terminal
 RUN apt update && \
 	apt upgrade -y && \
-	apt install -y --no-install-recommends mariadb-server && \
+	apt install -y mariadb-server && \
 	rm -rf /var/lib/apt/lists/*
 
 # Copy a file to the container
