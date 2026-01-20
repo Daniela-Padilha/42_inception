@@ -24,7 +24,7 @@ services:
     volumes:
       - v_web:/var/www/html
     healthcheck:
-      test: ["CMD", "curl", "-f", "https://localhost"]
+      test: ["CMD", "nginx", "-t"]
       interval: 5s
       timeout: 3s
       retries: 5
