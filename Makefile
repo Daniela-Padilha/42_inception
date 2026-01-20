@@ -77,8 +77,8 @@ clean:
 
 #clean and remove
 fclean: clean
-	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
-	rm -rf ~/data/*
+	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans && \
+	sudo rm -rf $(HOME)/data/*
 	@echo $(BMAG)"✨Images and volumes removed" $(BGRN)"successfully✨"$(RES)
 
 #remake
