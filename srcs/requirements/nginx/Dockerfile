@@ -1,5 +1,7 @@
 FROM debian:bookworm
 
+EXPOSE 443
+
 # build variables
 ARG CRED_PATH CRED_CERT CRED_KEY COUNTRY STATE LOCALITY ORGANIZATION ORG_UNIT COMMON_NAME
 
@@ -16,7 +18,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORGANIZATION}/OU=${ORG_UNIT}/CN=${COMMON_NAME}"
 
 RUN chmod 600 ${CRED_PATH}/${CRED_KEY} && chmod 644 ${CRED_PATH}/${CRED_CERT}
-
+RUN chown -R www-data:www-data /var/www/html/
 COPY conf/nginx.conf ./tmp/nginx.conf
 
 RUN envsubst '$CRED_PATH $CRED_KEY $CRED_CERT $COMMON_NAME' \
