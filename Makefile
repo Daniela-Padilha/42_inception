@@ -51,7 +51,7 @@ up: build
 image:
 	docker image ls
 
-stop:
+down:
 	$(DOCKER_COMPOSE) down
 	@echo $(BRED)"Containers are now stopped"$(RES)
 
@@ -75,6 +75,13 @@ clean:
 	$(DOCKER_COMPOSE) down --remove-orphans
 	@echo $(BMAG)"✨Containers removed" $(BGRN)"successfully✨"$(RES)
 
+#softclean
+softclean: clean
+	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans\
+	&& docker rmi -f $(docker images -aq)\
+	&& docker volume rm $(docker volume ls -q) 2>/dev/null
+	@echo $(BMAG)"✨Images and volumes removed" $(BGRN)"successfully✨"$(RES)
+
 #clean and remove
 fclean: clean
 	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans && sudo rm -rf $(HOME)/data/*\
@@ -82,7 +89,7 @@ fclean: clean
  	&& docker rmi -f $(docker images -aq)\
 	&& docker volume rm $(docker volume ls -q) 2>/dev/null || true && docker network prune -f\
 	&& docker builder prune -a -f && docker system prune -a -f
-	@echo $(BMAG)"✨Images and volumes removed" $(BGRN)"successfully✨"$(RES)
+	@echo $(BMAG)"✨All clean✨"$(RES)
 
 #remake
 re: fclean all
