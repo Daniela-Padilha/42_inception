@@ -12,21 +12,42 @@ echo "Database ready!"
 cd /var/www/html
 
 # Download WordPress if necessary
+if [ ! -f wp-cli.phar ]; then
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	chmod +x wp-cli.phar
+fi
+
+# config users
+WP="./wp-cli.phar"
+
+if [ ! -f wp-config-sample.php ]; then
+	$WP core download --allow-root
+fi
+
 if [ ! -f wp-config.php ]; then
-    echo "Downloading WordPress..."
-    curl -O https://wordpress.org/latest.tar.gz
-    tar -xzf latest.tar.gz
-    mv wordpress/* .
-    rm -rf wordpress latest.tar.gz
+	$WP config create \
+		--dbname="$DB_NAME" \
+		--dbuser="$DB_USER" \
+		--dbpass="$DB_PASSWORD" \
+		--dbhost="$DB_HOST" \
+		--allow-root
+fi
 
-    echo "Configuring WordPress..."
-    cp wp-config-sample.php wp-config.php
+if ! $WP core is-installed --allow-root >/dev/null 2>&1; then
+       $WP core install \
+	       --url="$WP_DOMAIN" \
+	       --title="$WP_TITLE" \
+	       --admin_user="$WP_ADMIN_USER" \
+	       --admin_password="$WP_ADMIN_PASSWORD" \
+	       --admin_email="$WP_ADMIN_EMAIL" \
+	       --allow-root
+fi
 
-	#edit conf file
-    sed -i "s/database_name_here/$DB_NAME/" wp-config.php
-    sed -i "s/username_here/$DB_USER/" wp-config.php
-    sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
-    sed -i "s/localhost/$DB_HOST/" wp-config.php
+if ! $WP user get "$WP_GUEST_USER" --allow-root >/dev/null 2>&1; then
+       $WP user create "$WP_GUEST_USER" "$WP_GUEST_EMAIL" \
+	       --role=subscriber\
+	       --user_pass="$WP_GUEST_PASSWORD" \
+	       --allow-root
 fi
 
 #permissions
