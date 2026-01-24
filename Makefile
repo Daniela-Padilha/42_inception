@@ -78,8 +78,9 @@ clean:
 #softclean
 softclean: clean
 	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans\
+	&& docker stop $(docker ps -aq) && docker rm $(docker ps -aq)\
 	&& docker rmi -f $(docker images -aq)\
-	&& docker volume rm $(docker volume ls -q) 2>/dev/null
+	&& docker volume rm $(docker volume ls -q) 2>/dev/null || true && docker network prune -f
 	@echo $(BMAG)"✨Images and volumes removed" $(BGRN)"successfully✨"$(RES)
 
 #clean and remove
